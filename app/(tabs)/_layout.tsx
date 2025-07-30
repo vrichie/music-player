@@ -20,7 +20,7 @@ const TabsNavigation = () => {
                 borderTopWidth: 0,
 
             },
-            tabBarBackground: () => <BlurView intensity={50}
+            tabBarBackground: () => <BlurView intensity={35}
                 style={{
                     ...StyleSheet.absoluteFillObject,
                     overflow: 'hidden',
