@@ -6,7 +6,7 @@ import { defaultStyles } from "styles"
 const SongsScreen = () => {
     return (
         <View style={defaultStyles.container}>
-            <ScrollView nestedScrollEnabled={true}>
+            <ScrollView nestedScrollEnabled={true} style={{ flex: 1 }}>
                 <TracksList />
             </ScrollView>
         </View>
