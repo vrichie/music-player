@@ -1,9 +1,9 @@
-import { unKnownTrackImageUri } from 'constants/images'
-import { colors, fontSize } from 'constants/tokens'
-import React from 'react'
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native'
-import FastImage from 'react-native-fast-image'
-import { defaultStyles } from 'styles'
+import { unKnownTrackImageUri } from 'constants/images';
+import { colors, fontSize } from 'constants/tokens';
+import { Image } from 'expo-image';
+import React from 'react';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { defaultStyles } from 'styles';
 
 export type TrackListItemProps = {
     track: { title: string; image?: string, artist?: string }
@@ -15,10 +15,8 @@ const TrackListItem = ({ track }: TrackListItemProps) => {
         <TouchableHighlight>
             <View style={styles.trackItemContainer}>
                 <View>
-                    <FastImage source={{
-                        uri: track?.image ?? unKnownTrackImageUri,
-                        priority: FastImage.priority.normal,
-                    }}
+                    <Image source={
+                        track?.image || unKnownTrackImageUri}
                         style={{ ...styles.trackArtworkImage, opacity: isActiveTrack ? 0.6 : 1 }} />
                 </View>
                 <View style={{ width: '100%' }}>
