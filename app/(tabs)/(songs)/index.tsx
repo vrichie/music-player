@@ -1,10 +1,14 @@
-import { Text, View } from "react-native"
+import TracksList from "components/TracksList"
+import { View } from "react-native"
+import { ScrollView } from "react-native-gesture-handler"
 import { defaultStyles } from "styles"
 
 const SongsScreen = () => {
     return (
         <View style={defaultStyles.container}>
-            <Text style={defaultStyles.text}> Songs Screen</Text>
+            <ScrollView nestedScrollEnabled={true}>
+                <TracksList />
+            </ScrollView>
         </View>
     )
 }
