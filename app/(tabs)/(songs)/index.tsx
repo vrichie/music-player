@@ -1,18 +1,23 @@
 import { useHeaderHeight } from "@react-navigation/elements"
 import TracksList from "components/TracksList"
 import { screenPadding } from "constants/tokens"
-import { View } from "react-native"
+import { useNavigationSearch } from "hooks/useNavigationSearch"
 import { ScrollView } from "react-native-gesture-handler"
 import { defaultStyles } from "styles"
 
 const SongsScreen = () => {
     const headerPadding = useHeaderHeight();
+    const search = useNavigationSearch({
+        searchBarOptions: {
+            placeholder: 'Find in songs'
+        }
+    })
     return (
-        <View style={{ ...defaultStyles.container, paddingTop: headerPadding }}>
-            <ScrollView nestedScrollEnabled={true} style={{ flex: 1, paddingHorizontal: screenPadding.horizontal }} contentInsetAdjustmentBehavior="automatic">
-                <TracksList />
-            </ScrollView>
-        </View>
+        // <View style={{  }}>
+        <ScrollView nestedScrollEnabled={true} style={{ paddingHorizontal: screenPadding.horizontal, ...defaultStyles.container, paddingTop: headerPadding }} contentInsetAdjustmentBehavior="automatic">
+            <TracksList />
+        </ScrollView>
+        // </View>
     )
 }
 
