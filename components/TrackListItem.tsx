@@ -1,35 +1,51 @@
+import { Entypo, Ionicons } from '@expo/vector-icons';
 import { unKnownTrackImageUri } from 'constants/images';
 import { colors, fontSize } from 'constants/tokens';
 import { Image } from 'expo-image';
 import React from 'react';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import LoaderKit from 'react-native-loader-kit';
+import { Track, useActiveTrack, useIsPlaying } from 'react-native-track-player';
 import { defaultStyles } from 'styles';
 
 export type TrackListItemProps = {
-    track: { title: string; image?: string, artist?: string }
+    track: Track,
+    onTrackSelect: (track: Track) => void
 }
 
-const TrackListItem = ({ track }: TrackListItemProps) => {
-    const isActiveTrack = false;
+const TrackListItem = ({ track, onTrackSelect: handleTrackSelect }: TrackListItemProps) => {
+    const isActiveTrack = useActiveTrack()?.url === track.url;
+    const { playing } = useIsPlaying();
     return (
-        <TouchableHighlight>
+        <TouchableHighlight onPress={() => handleTrackSelect(track)}>
             <View style={styles.trackItemContainer}>
                 <View>
                     <Image source={
-                        track?.image || unKnownTrackImageUri}
+                        track?.artwork || unKnownTrackImageUri}
                         style={{ ...styles.trackArtworkImage, opacity: isActiveTrack ? 0.6 : 1 }} />
-                </View>
-                <View style={{ width: '100%' }}>
-                    <Text numberOfLines={1} style={{ ...styles.trackTitleText, color: isActiveTrack ? colors.primary : colors.text }}>
-                        {track?.title}
-                    </Text>
                     {
-                        track?.artist && (
-                            <Text numberOfLines={1} style={styles.trackArtistText}>
-                                {track?.artist}
-                            </Text>
-                        )
+                        isActiveTrack && (playing ?
+                            <LoaderKit name="LineScaleParty" color={colors.icon} style={styles.trackPlayingIconIndicator} />
+                            :
+                            <Ionicons name='play' size={24} color={colors.icon} style={styles.trackPauseIconIndicator} />)
+
                     }
+                </View>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+
+                    <View style={{ width: '100%' }}>
+                        <Text numberOfLines={1} style={{ ...styles.trackTitleText, color: isActiveTrack ? colors.primary : colors.text }}>
+                            {track?.title}
+                        </Text>
+                        {
+                            track?.artist && (
+                                <Text numberOfLines={1} style={styles.trackArtistText}>
+                                    {track?.artist}
+                                </Text>
+                            )
+                        }
+                    </View>
+                    <Entypo name="dots-three-horizontal" size={18} color={colors.icon} />
                 </View>
             </View>
 
@@ -42,6 +58,18 @@ const styles = StyleSheet.create({
         columnGap: 14,
         alignItems: 'center',
         paddingRight: 20
+    },
+    trackPlayingIconIndicator: {
+        position: 'absolute',
+        top: 18,
+        left: 16,
+        width: 16,
+        height: 16,
+    },
+    trackPauseIconIndicator: {
+        position: 'absolute',
+        top: 14,
+        left: 14,
     },
     trackArtworkImage: {
         borderRadius: 8,

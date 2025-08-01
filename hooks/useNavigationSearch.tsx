@@ -6,7 +6,11 @@ import { SearchBarProps } from "react-native-screens";
 const defaultSearchOptions: SearchBarProps = {
     tintColor: colors.primary,
     hideWhenScrolling: false,
+    headerIconColor: colors.text,
+    textColor: colors.text,
     shouldShowHintSearchIcon: true,
+
+
 
 }
 
@@ -22,8 +26,7 @@ export const useNavigationSearch = ({ searchBarOptions }: { searchBarOptions?: S
             headerSearchBarOptions: {
                 ...defaultSearchOptions,
                 ...searchBarOptions,
-                onchangeText: handleOnChangeText,
-                hideWhenScrolling: false,
+                onChangeText: handleOnChangeText,
             },
 
         });
