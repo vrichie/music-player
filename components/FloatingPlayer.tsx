@@ -1,5 +1,6 @@
 import { unKnownTrackImageUri } from "constants/images";
 import { Image } from 'expo-image';
+import { useRouter } from "expo-router";
 import { useLastActiveTrack } from "hooks/useLastActiveTrack";
 import { StyleSheet, TouchableOpacity, View, ViewProps } from "react-native";
 import { useActiveTrack } from "react-native-track-player";
@@ -9,12 +10,17 @@ import { PlayPauseButton, SkipToNextButton } from "./PlayerControls";
 
 
 export const FloatingPlayer = ({ style }: ViewProps) => {
+    const router = useRouter()
     const activeTrack = useActiveTrack();
     const lastActiveTrack = useLastActiveTrack()
     const displayedTrack = activeTrack ?? lastActiveTrack
+    const handlePress = () => {
+        router.navigate('/player')
+    }
     if (!displayedTrack) return null
 
-    return <TouchableOpacity activeOpacity={0.9} style={[styles.container, style]}>
+
+    return <TouchableOpacity activeOpacity={0.9} style={[styles.container, style]} onPress={handlePress}>
         <>
             <Image source={
                 displayedTrack?.artwork || unKnownTrackImageUri}
