@@ -1,7 +1,9 @@
 
-import library from '@/assets/data/library.json'
+import { useFavorites } from 'app/store/library'
 import TracksList from "components/TracksList"
 import { screenPadding } from "constants/tokens"
+import { trackTitleFilter } from 'helpers/filter'
+import { generateTrackListId } from 'helpers/miscellaneous'
 import { useNavigationSearch } from "hooks/useNavigationSearch"
 import { useMemo } from "react"
 import { ScrollView, View } from "react-native"
@@ -13,13 +15,15 @@ const FavoritesScreen = () => {
             placeholder: "Find in songs"
         }
     })
-    const favoriteTracks = useMemo(() => {
-        return library.filter(track => track.rating === 1)
-    }, [])
+    const favoriteTracks = useFavorites().favorites
+    const filtered = useMemo(() => {
+        if (!search) return favoriteTracks
+        return favoriteTracks.filter(trackTitleFilter(search))
+    }, [favoriteTracks, search])
     return (
         <View style={defaultStyles.container}>
             <ScrollView style={{ paddingHorizontal: screenPadding.horizontal }} contentInsetAdjustmentBehavior="automatic">
-                <TracksList tracks={favoriteTracks} />
+                <TracksList tracks={filtered} id={generateTrackListId('favorites', search)} />
             </ScrollView>
         </View>
     )

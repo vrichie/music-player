@@ -6,3 +6,7 @@ export const formatSecondsToMinutes = (seconds: number) => {
 
 	return `${formattedMinutes}:${formattedSeconds}`
 }
+
+export const generateTrackListId = (trackListName: string, search?: string) => {
+	return `${trackListName}${`-${search}` || ''}`
+}

@@ -1,8 +1,9 @@
 
-import library from "@/assets/data/library.json"
+import { useTracks } from "app/store/library"
 import TracksList from "components/TracksList"
 import { screenPadding } from "constants/tokens"
 import { trackTitleFilter } from "helpers/filter"
+import { generateTrackListId } from "helpers/miscellaneous"
 import { useNavigationSearch } from "hooks/useNavigationSearch"
 import { useMemo } from "react"
 import { ScrollView } from "react-native-gesture-handler"
@@ -15,14 +16,17 @@ const SongsScreen = () => {
         }
     })
 
-    const filteredTracks = useMemo(() => {
-        if (!search) return library
-        return library.filter(trackTitleFilter(search))
-    }, [search])
-    console.log(search)
+
+    const tracks = useTracks()
+    const filtered = useMemo(() => {
+        if (!search) return tracks
+        return tracks.filter(trackTitleFilter(search))
+    }, [tracks, search])
+
+
     return (
         <ScrollView nestedScrollEnabled={true} style={{ paddingHorizontal: screenPadding.horizontal, ...defaultStyles.container }} contentInsetAdjustmentBehavior="automatic">
-            <TracksList tracks={filteredTracks} />
+            <TracksList tracks={filtered} id={generateTrackListId('songs', search)} />
         </ScrollView>
     )
 }
