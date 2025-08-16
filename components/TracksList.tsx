@@ -1,10 +1,10 @@
 
-import { useQueue } from 'app/store/queue'
 import { unKnownTrackImageUri } from 'constants/images'
 import { Image } from 'expo-image'
 import React, { useRef } from 'react'
 import { FlatList, FlatListProps, Text, View } from 'react-native'
 import TrackPlayer, { Track } from 'react-native-track-player'
+import { useQueue } from 'store/queue'
 import { utilsStyles } from "styles"
 import QueueControls from './QueueControls'
 import TrackListItem from "./TrackListItem"

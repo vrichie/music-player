@@ -7,6 +7,8 @@ import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import LoaderKit from 'react-native-loader-kit';
 import { Track, useActiveTrack, useIsPlaying } from 'react-native-track-player';
 import { defaultStyles } from 'styles';
+import { TrackShortcutsMenu } from './TrackShortcutsMenu';
+import { StopPropagation } from './utils/StopPropagation';
 
 export type TrackListItemProps = {
     track: Track,
@@ -45,7 +47,12 @@ const TrackListItem = ({ track, onTrackSelect: handleTrackSelect }: TrackListIte
                             )
                         }
                     </View>
-                    <Entypo name="dots-three-horizontal" size={18} color={colors.icon} />
+                    <StopPropagation>
+                        <TrackShortcutsMenu track={track}>
+                            <Entypo name="dots-three-horizontal" size={18} color={colors.icon} />
+                        </TrackShortcutsMenu>
+                    </StopPropagation>
+
                 </View>
             </View>
 

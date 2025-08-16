@@ -27,10 +27,10 @@ export default function QueueControls({ tracks, style, ...viewProps }: QueueCont
             {/* play button */}
             <View style={{ flex: 1 }}>
                 <TouchableOpacity activeOpacity={0.8} style={styles.button} onPress={handlePlay}>
-                    <Text>
-                        <Ionicons name='play' size={22} color={colors.primary} />
 
-                    </Text>
+                    <Ionicons name='play' size={22} color={colors.primary} />
+
+
                     <Text style={styles.buttonText}>
                         Play
                     </Text>
@@ -42,9 +42,9 @@ export default function QueueControls({ tracks, style, ...viewProps }: QueueCont
 
             <View style={{ flex: 1 }}>
                 <TouchableOpacity activeOpacity={0.8} style={styles.button} onPress={handleShuffle}>
-                    <Text>
-                        <Ionicons name='shuffle-sharp' size={22} color={colors.primary} />
-                    </Text>   <Text style={styles.buttonText}>
+
+                    <Ionicons name='shuffle-sharp' size={22} color={colors.primary} />
+                    <Text style={styles.buttonText}>
                         Shuffle
                     </Text>
 

@@ -1,4 +1,3 @@
-import { useArtists } from "app/store/library"
 import { unKnownArtistImageUri } from "constants/images"
 import { screenPadding } from "constants/tokens"
 import { Image } from "expo-image"
@@ -7,6 +6,7 @@ import { artistNameFilter } from "helpers/filter"
 import { useNavigationSearch } from "hooks/useNavigationSearch"
 import { useMemo } from "react"
 import { FlatList, ScrollView, StyleSheet, Text, TouchableHighlight, View } from "react-native"
+import { useArtists } from "store/library"
 import { defaultStyles, utilsStyles } from "styles"
 
 const ItemSeparatorComponent = () => {

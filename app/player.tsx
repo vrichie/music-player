@@ -10,6 +10,7 @@ import { Image } from "expo-image"
 
 import { LinearGradient } from 'expo-linear-gradient'
 import { usePlayerBackground } from "hooks/usePlayerBackground"
+import { useTrackPlayerFavorite } from "hooks/useTrackPlayerFavorite"
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { useActiveTrack } from "react-native-track-player"
@@ -18,11 +19,9 @@ import { defaultStyles } from "styles"
 const PlayerScreen = () => {
     const activeTrack = useActiveTrack()
     const { top, bottom } = useSafeAreaInsets();
+    const { isFavorite, toggleFavorite } = useTrackPlayerFavorite();
     const { imageColors } = usePlayerBackground(activeTrack?.artwork ?? unKnownTrackImageUri);
-    let isFav = false;
-    const toggleFav = () => {
-        isFav = !isFav
-    }
+
     if (!activeTrack) {
         return <View style={[defaultStyles.container, { justifyContent: 'center' }]}>
             <ActivityIndicator color={colors.icon} />
@@ -51,7 +50,7 @@ const PlayerScreen = () => {
                                     </View>
 
                                     {/* fav icon */}
-                                    <FontAwesome name={isFav ? 'heart' : 'heart-o'} size={20} color={isFav ? colors.primary : colors.icon} style={{ marginHorizontal: 14 }} onPress={toggleFav} />
+                                    <FontAwesome name={isFavorite ? 'heart' : 'heart-o'} size={20} color={isFavorite ? colors.primary : colors.icon} style={{ marginHorizontal: 14 }} onPress={toggleFavorite} />
 
                                 </View>
                                 {activeTrack.artist && (

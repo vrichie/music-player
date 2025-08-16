@@ -1,9 +1,9 @@
-import { useArtists } from "app/store/library"
 import ArtistTracksList from "components/ArtistTracksList"
 import { screenPadding } from "constants/tokens"
 import { Redirect, useLocalSearchParams } from "expo-router"
 import { View } from "react-native"
 import { ScrollView } from "react-native-gesture-handler"
+import { useArtists } from "store/library"
 import { defaultStyles } from "styles"
 
 const ArtistDetailScreen = () => {

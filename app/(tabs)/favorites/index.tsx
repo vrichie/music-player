@@ -1,5 +1,4 @@
 
-import { useFavorites } from 'app/store/library'
 import TracksList from "components/TracksList"
 import { screenPadding } from "constants/tokens"
 import { trackTitleFilter } from 'helpers/filter'
@@ -7,6 +6,7 @@ import { generateTrackListId } from 'helpers/miscellaneous'
 import { useNavigationSearch } from "hooks/useNavigationSearch"
 import { useMemo } from "react"
 import { ScrollView, View } from "react-native"
+import { useFavorites } from 'store/library'
 import { defaultStyles } from "styles"
 
 const FavoritesScreen = () => {
